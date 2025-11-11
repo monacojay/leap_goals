@@ -10,15 +10,14 @@
   <div class="wrap">
     <header class="page-header">
       <h1>Leap Goals</h1>
-      <div class="actions">
-        <button id="exportBtn" title="Download your goals as JSON">Export</button>
-        <label class="import">
-          <input id="importInput" type="file" accept="application/json" hidden />
-          <span>Import</span>
-        </label>
+      <div class="actions no-print">
+        <button id="exportBtn" title="Export / Save as PDF">Export</button>
         <button id="clearAllBtn" class="danger" title="Remove everything">Clear All</button>
       </div>
     </header>
+
+    <!-- shows only in print -->
+    <div id="printMeta" class="print-only"></div>
 
     <section class="card">
       <h3>New Leap Goal</h3>
@@ -30,7 +29,7 @@
 
     <section id="leaps" class="stack"></section>
 
-    <footer class="footer">
+    <footer class="footer no-print">
       <small>Data is saved locally in your browser.</small>
     </footer>
   </div>
@@ -75,12 +74,12 @@
             <span class="label">Leap Goal:</span>
             <input type="text" class="leap-input" value="${esc(leap.title)}" />
           </div>
-          <div class="leap-ctl">
+          <div class="leap-ctl no-print">
             <button class="icon-btn danger delete-leap-btn" title="Delete leap">🗑</button>
           </div>
         </div>
 
-        <section class="card new-step-card">
+        <section class="card new-step-card no-break">
           <h4>New Step Goal</h4>
           <form class="add-step-form row">
             <input type="text" class="new-step-text" placeholder="Step title (e.g., Write outline)" required />
@@ -93,7 +92,7 @@
             <div class="step" data-step="${s.id}">
               <input type="checkbox" class="step-done" ${s.done ? 'checked' : ''} />
               <input type="text" class="step-text" value="${esc(s.text)}" />
-              <button class="icon-btn rm step-remove" title="Remove">✖</button>
+              <button class="icon-btn rm step-remove no-print" title="Remove">✖</button>
             </div>
           `).join('')}
         </div>
@@ -165,7 +164,7 @@
 
     if (e.target.classList.contains('leap-input')){
       leap.title = e.target.value;
-      save(); // smooth typing (no re-render)
+      save(); // smooth typing
     }
     if (e.target.classList.contains('step-text')){
       const stepId = e.target.closest('.step').dataset.step;
@@ -183,27 +182,18 @@
     if (step){ step.done = e.target.checked; save(); render(); }
   });
 
-  // Export / Import / Clear
+  // Clear all
   document.getElementById('clearAllBtn').onclick = ()=>{
     if (confirm('Clear all data?')){ leaps = []; save(); render(); }
   };
+
+  // EXPORT -> PDF (opens system Save as PDF)
   document.getElementById('exportBtn').onclick = ()=>{
-    const blob = new Blob([JSON.stringify(leaps, null, 2)], {type:'application/json'});
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'leap_goals.json';
-    a.click();
-    setTimeout(()=>URL.revokeObjectURL(a.href), 0);
-  };
-  document.getElementById('importInput').onchange = async (e)=>{
-    const f = e.target.files?.[0]; if (!f) return;
-    try{
-      const text = await f.text();
-      const data = JSON.parse(text);
-      if (!Array.isArray(data)) throw new Error('Invalid file');
-      leaps = data; save(); render();
-    }catch(err){ alert('Import failed: ' + err.message); }
-    finally{ e.target.value = ''; }
+    // set print meta (date/time)
+    const meta = document.getElementById('printMeta');
+    const d = new Date();
+    meta.textContent = `Exported: ${d.toLocaleString()}`;
+    window.print();
   };
 
   // First paint
