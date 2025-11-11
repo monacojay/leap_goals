@@ -14,12 +14,11 @@ body{
 .page-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
 .page-header h1{margin:0;font-size:22px;letter-spacing:.3px}
 .actions{display:flex;gap:10px;align-items:center}
-.actions button,.actions .import{
+.actions button{
   appearance:none;border:1px solid var(--ring);background:#0e131a;color:var(--text);
   padding:8px 12px;border-radius:10px;cursor:pointer
 }
-.actions .import span{display:inline-block}
-.actions button:hover,.actions .import:hover{border-color:var(--accent)}
+.actions button:hover{border-color:var(--accent)}
 .actions .danger{border-color:#3a1f23;color:#ffd5d8;background:#1a0f11}
 
 /* Card + form */
@@ -37,7 +36,7 @@ body{
 .stack{display:grid;gap:12px}
 
 /* Leap card */
-.leap{background:var(--card);border:1px solid var(--ring);border-radius:var(--radius);overflow:hidden}
+.leap{background:var(--card);border:1px solid var(--ring);border-radius:var(--radius);overflow:hidden;break-inside:avoid}
 .leap-head{
   display:flex;gap:12px;align-items:center;justify-content:space-between;
   padding:12px 14px;border-bottom:1px solid var(--ring)
@@ -54,32 +53,17 @@ body{
 .icon-btn:hover{border-color:var(--accent)}
 .icon-btn.danger{border-color:#3a1f23;color:#ffd5d8;background:#1a0f11}
 
-/* New Step Goal card (inside each leap) */
-/* New Step Goal card (inside each leap) */
+/* New Step Goal card (inside each leap, compact) */
 .new-step-card {
-  background: #0f131a;                 /* darker, subtle background */
-  border: 1px solid var(--ring);
-  border-radius: 12px;                 /* slightly smaller radius */
-  padding: 10px 12px;                  /* less padding */
-  margin: 10px 14px;                   /* tighter spacing */
+  background:#0f131a;
+  border:1px solid var(--ring);
+  border-radius:12px;
+  padding:10px 12px;
+  margin:10px 14px;
 }
-
-.new-step-card h4 {
-  margin: 0 0 6px;
-  font-size: 15px;                     /* smaller header text */
-  color: var(--muted);
-}
-
-.new-step-card .row input[type="text"] {
-  padding: 8px 10px;                   /* smaller input padding */
-  font-size: 14px;
-}
-
-.new-step-card .row button {
-  padding: 8px 10px;
-  font-size: 14px;
-}
-
+.new-step-card h4{margin:0 0 6px;font-size:15px;color:var(--muted)}
+.add-step-form.row input{flex:1;padding:8px 10px;font-size:14px}
+.add-step-form.row button{padding:8px 10px;font-size:14px}
 
 /* Steps list */
 .steps{padding:12px 14px;display:grid;gap:8px}
@@ -93,9 +77,28 @@ body{
 }
 .step .rm{border-color:#3a1f23;color:#ffd5d8;background:#1a0f11}
 
-/* Add-step row (inherits .row styles) */
-.add-step-form.row input{flex:1}
-.add-step-form.row button{white-space:nowrap}
-
+/* Footer */
 a{color:var(--accent)}
 .footer{margin:18px 2px 8px;color:var(--muted);text-align:center;font-size:12px}
+
+/* Print styles */
+.print-only{display:none}
+.no-print{}
+
+/* Tidy PDF output */
+@media print {
+  html, body { background:#fff; color:#000; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .no-print { display:none !important; }
+  .print-only { display:block; margin-bottom:8px; color:#333; font-size:12px; }
+  .wrap { max-width:none; padding:0 12mm; }
+  .card, .leap, .step, .new-step-card {
+    background:#fff !important;
+    border:1px solid #ccc !important;
+  }
+  .leap-title input, .step input[type="text"] {
+    background:#fff !important; color:#000 !important; border:1px solid #bbb !important;
+  }
+  .step { grid-template-columns:20px 1fr; }
+  .step .rm { display:none !important; }
+  .no-break { break-inside:avoid; }
+}
