@@ -1,1 +1,56 @@
+:root{
+  --bg:#0f1115; --card:#151821; --ring:#1f2431; --text:#e9edf1; --muted:#a7b0be;
+  --accent:#7bd389; --accent-hi:#9ef3a3; --danger:#ef4444;
+  --radius:16px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--text)}
+.wrap{max-width:880px;margin:0 auto;padding:28px 16px}
+
+.page-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.page-header h1{margin:0;font-size:22px;letter-spacing:.3px}
+.actions{display:flex;gap:10px;align-items:center}
+.actions button,.actions .import{appearance:none;border:1px solid var(--ring);background:#0e131a;color:var(--text);padding:8px 12px;border-radius:10px;cursor:pointer}
+.actions .import span{display:inline-block}
+.actions button:hover,.actions .import:hover{border-color:var(--accent)}
+.actions .danger{border-color:#3a1f23;color:#ffd5d8;background:#1a0f11}
+
+.card{background:var(--card);border:1px solid var(--ring);border-radius:var(--radius);padding:16px;margin:16px 0}
+.card h3{margin:0 0 10px;font-size:18px}
+.row{display:flex;gap:10px}
+.row input[type="text"]{flex:1;background:#0f131a;border:1px solid var(--ring);border-radius:10px;color:var(--text);padding:10px 12px}
+.row button{border:1px solid var(--ring);background:#0e131a;color:var(--text);padding:10px 12px;border-radius:10px;cursor:pointer}
+.row button:hover{border-color:var(--accent)}
+
+.stack{display:grid;gap:12px}
+
+/* Leap card */
+.leap{background:var(--card);border:1px solid var(--ring);border-radius:var(--radius);overflow:hidden}
+.leap-head{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--ring)}
+.leap-title{display:flex;gap:10px;align-items:center;flex:1}
+.leap-title input{flex:1;background:#0f131a;border:1px solid var(--ring);border-radius:10px;color:var(--text);padding:8px 10px}
+.leap-title .label{font-weight:700}
+.leap-ctl{display:flex;gap:8px}
+.icon-btn{border:1px solid var(--ring);background:#0e131a;color:var(--text);padding:6px 8px;border-radius:10px;cursor:pointer}
+.icon-btn:hover{border-color:var(--accent)}
+.icon-btn.danger{border-color:#3a1f23;color:#ffd5d8;background:#1a0f11}
+.progress{padding:10px 14px;display:grid;gap:6px}
+.progressbar{height:8px;background:#0f131a;border:1px solid var(--ring);border-radius:999px;overflow:hidden}
+.progressbar > div{height:100%;background:var(--accent);width:0%}
+.progress-label{font-size:12px;color:var(--muted)}
+
+.steps{padding:12px 14px;display:grid;gap:8px;border-top:1px solid var(--ring)}
+.step{display:grid;grid-template-columns:26px 1fr auto;gap:10px;align-items:center;background:#0f131a;border:1px solid var(--ring);border-radius:10px;padding:8px 10px}
+.step input[type="checkbox"]{width:16px;height:16px}
+.step input[type="text"]{background:#0d1218;border:1px solid var(--ring);border-radius:8px;color:var(--text);padding:6px 8px}
+.step .rm{border-color:#3a1f23;color:#ffd5d8;background:#1a0f11}
+
+.add-step{display:flex;gap:8px;margin-top:6px}
+.add-step input{flex:1;background:#0f131a;border:1px solid var(--ring);border-radius:8px;color:var(--text);padding:8px 10px}
+.add-step button{border:1px solid var(--ring);background:#0e131a;color:var(--text);padding:8px 10px;border-radius:8px;cursor:pointer}
+.add-step button:hover{border-color:var(--accent)}
+
+a{color:var(--accent)}
+.footer{margin:18px 2px 8px;color:var(--muted);text-align:center;font-size:12px}
 
