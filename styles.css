@@ -1,7 +1,7 @@
 :root{
   --bg:#0f1115; --card:#151821; --ring:#1f2431; --text:#e9edf1; --muted:#a7b0be;
   --accent:#7bd389; --accent-hi:#9ef3a3; --danger:#ef4444; --radius:16px;
-  --label-w:100px; /* width of "Leap Goal:" label; tweak if needed */
+  --label-w:100px; /* width of "Leap Goal:" label text block */
 }
 
 *{box-sizing:border-box}
@@ -34,7 +34,6 @@ body{
   border:1px solid var(--ring);background:#0e131a;color:var(--text);padding:10px 12px;border-radius:10px;cursor:pointer
 }
 .row button:hover{border-color:var(--accent)}
-
 .stack{display:grid;gap:12px}
 
 /* Leap card */
@@ -45,9 +44,9 @@ body{
 }
 .leap-title{display:flex;gap:10px;align-items:center;flex:1}
 .leap-title .label{
-  font-weight:700;
-  display:inline-block;               /* fixed width for alignment */
+  display:inline-block;           /* fixed width so input lines up consistently */
   width:var(--label-w);
+  font-weight:700;
 }
 .leap-title input{
   flex:1;background:#0f131a;border:1px solid var(--ring);border-radius:10px;color:var(--text);padding:8px 10px
@@ -59,26 +58,28 @@ body{
 .icon-btn:hover{border-color:var(--accent)}
 .icon-btn.danger{border-color:#3a1f23;color:#ffd5d8;background:#1a0f11}
 
-/* EXACT ALIGNMENT: body under header uses same two columns */
+/* Body grid: column 1 = label area, column 2 = input area */
 .leap-body{
   display:grid;
-  grid-template-columns: var(--label-w) 1fr; /* col1 = label, col2 = input start */
-  column-gap:10px;                           /* matches leap-title gap */
-  padding:0 14px 12px;                       /* matches card side padding */
+  grid-template-columns: var(--label-w) 1fr;
+  column-gap:10px;                 /* same as .leap-title gap */
+  padding:0 14px 12px;             /* matches card side padding */
 }
 .leap-body .spacer{ grid-column:1; }
 
-/* Steps section (placed in column 2 for perfect alignment) */
+/* Steps heading UNDER THE LABEL (column 1) */
 .steps-heading{
-  grid-column:2;
+  grid-column:1;
   margin:12px 0 6px;
   font-size:15px;
   color:var(--muted);
 }
+
+/* Steps list & Add Step under the INPUT (column 2) */
 .steps{
   grid-column:2;
   display:grid; gap:8px;
-  padding:0; /* grid takes care of alignment */
+  padding:0;
 }
 .step{
   display:grid;grid-template-columns:26px 1fr auto;gap:10px;align-items:center;
@@ -90,7 +91,6 @@ body{
 }
 .step .rm{border-color:#3a1f23;color:#ffd5d8;background:#1a0f11}
 
-/* Add Step area (also column 2) */
 .new-step-card{
   grid-column:2;
   background:#0f131a;border:1px solid var(--ring);border-radius:12px;
@@ -104,18 +104,17 @@ body{
 a{color:var(--accent)}
 .footer{margin:18px 2px 8px;color:var(--muted);text-align:center;font-size:12px}
 
-/* Print styles */
+/* Print */
 .print-only{display:none}
 .no-print{}
-
-@media print {
-  html, body { background:#fff; color:#000; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-  .no-print { display:none !important; }
-  .print-only { display:block; margin-bottom:8px; color:#333; font-size:12px; }
-  .wrap { max-width:none; padding:0 12mm; }
-  .card, .leap, .step, .new-step-card { background:#fff !important; border:1px solid #ccc !important; }
-  .leap-title input, .step input[type="text"] { background:#fff !important; color:#000 !important; border:1px solid #bbb !important; }
-  .step { grid-template-columns:20px 1fr; }
-  .step .rm { display:none !important; }
-  .no-break { break-inside:avoid; }
+@media print{
+  html,body{background:#fff;color:#000;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .no-print{display:none !important}
+  .print-only{display:block;margin-bottom:8px;color:#333;font-size:12px}
+  .wrap{max-width:none;padding:0 12mm}
+  .card,.leap,.step,.new-step-card{background:#fff !important;border:1px solid #ccc !important}
+  .leap-title input,.step input[type="text"]{background:#fff !important;color:#000 !important;border:1px solid #bbb !important}
+  .step{grid-template-columns:20px 1fr}
+  .step .rm{display:none !important}
+  .no-break{break-inside:avoid}
 }
