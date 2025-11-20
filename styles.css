@@ -108,8 +108,9 @@ body{
   font-weight: 300;
   color: #888;
 
-  margin-top: 40px;        /* space down from the app content */
-  padding: 0 20px;         /* inset from left + right */
+  width: 60%;          /* only take up 60% of the app box */
+  margin-left: 20px;   /* inset from the left */
+  margin-top: 40px;    /* space from content above */
   text-align: left;
 }
 
