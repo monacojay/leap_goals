@@ -110,7 +110,8 @@ body{
 
   width: calc(100% - 40px);   /* full width minus padding */
   margin-left: 20px;          /* 20px from the left edge */
-  margin-top: 25px;           /* 25px down from the app box */
+  margin-right: 50px;
+  margin-top: 45px;           /* 25px down from the app box */
   text-align: left;           /* left align the text */
 }
 
