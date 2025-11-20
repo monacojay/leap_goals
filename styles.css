@@ -102,14 +102,14 @@ body{
 .add-step-form.row button{padding:8px 10px;font-size:14px}
 
 #stepgoals-info {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 300;
   line-height: 1.4;
-  color: #444;
+  color: #666;
 
-  max-width: 360px;   /* narrower than the app */
+  max-width: 400px;   /* narrower than the app */
   margin: 20px auto 0;
-  text-align: center;
+  text-align: left;
 }
 
 #stepgoals-info p {
