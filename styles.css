@@ -101,6 +101,24 @@ body{
 .add-step-form.row input{flex:1;padding:8px 10px;font-size:14px}
 .add-step-form.row button{padding:8px 10px;font-size:14px}
 
+#stepgoals-info {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #444;
+  max-width: 600px;
+  margin: 20px auto 0;
+  text-align: center;
+}
+
+#stepgoals-info p {
+  margin-bottom: 12px;
+}
+
+#stepgoals-info .dedication {
+  font-weight: 600;
+  margin-top: 16px;
+}
+
 /* Footer */
 a{color:var(--accent)}
 .footer{margin:18px 2px 8px;color:var(--muted);text-align:center;font-size:12px}
